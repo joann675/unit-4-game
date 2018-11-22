@@ -1,28 +1,45 @@
 $(document).ready(function () {
 
-    setHealth();
+    
+    $('.availableSection').data('old-state', $('.availableSection').html());
+
+
+    setHealth(); 
 
     $("#myButton").on("click", function () {
         if (!$(".defenderSection").children().length)
             console.log("Need to pick a defender first");
         else {
             var defender = $(".defenderSection").children();
+            var defenderName = defender.text();
             var myCharacter = $(".yourCharacterSection").children();
             // attack decreases defenders health and increases my attackPower
             console.log("health = " + defender.children(".health").text());
             console.log("attack = " + myCharacter.attr("attackPower"));
             var defHealth = defender.children(".health").text() -
                 myCharacter.attr("attackPower");
+            $("#line1").text("You attacked " + defenderName + " for " + myCharacter.attr("attackPower") + " damage");
+            $("#line2").text(defenderName + " attacked you back for " + defender.attr("counterattackpower") + " damage");
+    
             defender.children(".health").text(defHealth);
             var original = myCharacter.attr("originalPower");
             var current = myCharacter.attr("attackPower");
             myCharacter.attr("attackPower", parseInt(current) + parseInt(original));
+            
+
             if (parseInt(defHealth) <= 0) {
-                // This enemy has been defeatet, remove them from the game
+                // This enemy has been defeated, remove them from the game
                 $(".defenderSection").empty();
+                
                 // Check if any more enemies are available to fight
                 if (!$(".availableEnemiesSection").children().length) {
-                    alert("You win");
+                    $("#line1").text("You won. GAME OVER!!!" );
+                    $("#line2").empty();
+                    drawRestartButton();
+                }
+                else {
+                    $("#line1").text("You defeated " + defenderName + ". You can choose to fight another enemy.");
+                    $("#line2").empty();
                 }
 
             }
@@ -34,7 +51,9 @@ $(document).ready(function () {
                 myCharacter.children(".health").text(myHealth);
                 if (parseInt(myHealth) <= 0) {
                     // You have been defeated
-                    alert("You lose");
+                    $("#line1").text("You have been defeated... GAME OVER!!!");
+                    $("#line2").text("");
+                    drawRestartButton();
                 }
             }
         }
@@ -54,12 +73,17 @@ $(document).ready(function () {
 
             $(".availableSection").children(".imgContainer").each(function () {
                 var characterToMove = $(this);
+              
+                $(this).css("background-color", "red");
                 $(".availableEnemiesSection").append(characterToMove);
             });
         }
         else {
             console.log("Your current enemy id " + $(this).text());
             var enemyChosen = $(this);
+            $(this).css("background-color", "black");
+            $(this).css("color", "white");
+            $("#line1").empty();
 
 
             $(".defenderSection").append(enemyChosen);
@@ -67,6 +91,19 @@ $(document).ready(function () {
     });
 
 });
+
+$("#Restart").on("click", function () {
+    removeRestartButton();
+    $("#line1").empty();
+    $(".yourCharacterSection").empty();
+    $(".availableEnemiesSection").empty();
+    $(".defenderSection").empty();
+    $('.availableSection').html($('.availableSection').data('old-state'));
+   
+    setHealth();
+
+
+})
 
 function setHealth() {
     console.log("Inside of setHealth")
@@ -89,6 +126,26 @@ function setHealth() {
 
 
     })
+}
+
+function drawRestartButton() {
+    console.log("Inside of drawRestartButton")
+    $("#Restart").text("Restart");
+    $("#Restart").css("background-color", "white");
+    $("#Restart").css("color", "black");
+    $("#Restart").css("height","20px");
+    $("#Restart").css("width", "60px");
+
+}
+
+function removeRestartButton() {
+    console.log("Inside of removeRestartButton")
+    $("#Restart").empty();
+    $("#Restart").css("background-color", "");
+    $("#Restart").css("color", "");
+    $("#Restart").css("height","");
+    $("#Restart").css("width", "");
+
 }
 
 
