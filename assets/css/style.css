@@ -7,8 +7,6 @@ body {
     color: #ffffff;
     font-size: 16px;
     line-height: 20px;
-    
-   
 
 }
 
@@ -16,22 +14,21 @@ body {
 .wrapper {
     margin: 10px auto;
     padding: 10px;
-    width: 960px;
-    height: 870px;
-    background: url("../images/laser-sword-2106883_1280.jpg");
-    background-size: 172%;
-   
-
+    width: 100%;
+    height: 1000px;
+    background: url("../images/tfa_poster_wide_header-1536x864-959818851016.jpg");
+    background-size: 100%;
     
 }
 .imgContainer {
     display: inline-block;
-    border: 1px green solid;
-    height: 150px;
+    border: 2px green solid;
+    height: 155px;
     width: 150px;
     background: #ffffff;
     padding-left: 20px;
     padding-right: 20px;
+    padding-bottom:5px;
     margin: 0;
     color: black;
     font-size: 12px;
@@ -46,7 +43,7 @@ img {
 
 .myHeader {
     float: right;
-    font-size: 30px;
+    font-size: 40px;
     height: 80px;
 }
 .yourCharacterSection {
@@ -64,6 +61,13 @@ img {
     text-align: center;
 
 }
+
+h2 {
+    font-size: 30px;
+    line-height: 32px;
+}
+
+
 
 
 
