@@ -18,3 +18,7 @@ remains constant.
 Choose your player carefully. You want to first fight against a defender with a low counter
 attack power. 
 
+### Links
+
+This site is published at https://joann675.github.io/unit-4-game/
+
